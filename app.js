@@ -4,7 +4,8 @@ const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const mongoose = require("mongoose")
 const ejs = require("ejs")
-const indexRoute = require("./routes/index");
+const indexRouter = require("./routes/index");
+const authorRouter = require("./routes/authors")
 
 
 
@@ -31,8 +32,8 @@ app.use(expressLayouts);
 })();
 
 
-app.use("/", indexRoute);
-
+app.use("/", indexRouter);
+app.use("/authors", authorRouter)
 
 
 app.listen(process.env.PORT || 3000, () => {
