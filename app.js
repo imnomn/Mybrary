@@ -7,9 +7,6 @@ const ejs = require("ejs")
 const indexRouter = require("./routes/index");
 const authorRouter = require("./routes/authors")
 
-
-
-
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
