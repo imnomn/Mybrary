@@ -1,0 +1,58 @@
+<div class="container">
+
+   <h2>New Book</h2>
+
+   <form action="/books" method="post" enctype="multipart/form-data">
+      <div class="row">
+         <div class="mb-3 col-12 col-md-5">
+            <label for="Book" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="book">
+         </div>
+
+         <div class="mb-3 col-12 col-md-5 offset-md-2">
+            <label for="author" class="form-label">Author Name</label>
+            <select class="form-select " name="author">
+                <% authors.forEach(author => {%>
+                   <option value="<%=author.id%>" ><%=author.name%></option>
+
+                <% }); %>
+            </select>
+         </div>
+      </div>
+      <div class="row">
+         <div class="mb-3 col-12 col-md-5">
+            <label for="publishDate" class="form-label">Publish Date</label>
+            <input type="date" class="form-control" name="publishDate" id="book">
+         </div>
+
+         <div class="mb-3 col-12 col-md-5 offset-md-2">
+            <label for="pageCount" class="form-label">Page Count</label>
+            <input type="number" class="form-control" name="pageCount" id="book">
+         </div>
+      </div>
+
+
+      <div class="row">
+         <div class="mb-3 col-12 col-md-5">
+            <div class="">
+               <label for="formFile" class="form-label">Cover Image</label><br>
+               <input class="form-control" name="cover" type="file" id="formFile">
+            </div>
+         </div>
+
+         <div class="mb-3 col-12 col-md-5 offset-md-2">
+            <div class="">
+               <label for="newBookTextArea" class="form-label">Description </label>
+               <textarea class="form-control" name="description" id="newBookTextArea" rows="6"></textarea>
+            </div>
+         </div>
+      </div>
+
+
+      <div class="d-flex justify-content-between">
+         <a href="/books" class="btn btn-danger">Cancel</a>
+         <button type="submit" class="btn btn-primary ">Create</button>
+      </div>
+   </form>
+
+</div>

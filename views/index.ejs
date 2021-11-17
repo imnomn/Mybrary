@@ -1,1 +1,24 @@
-this is in the index.ejs file and hence this file will load all the materials in the layouts
+<div class="container">
+   <h2>Recently Added</h2>
+
+   <div class="row">
+      <% books.forEach(book => { %>
+         <div class="col-12 col-md-3 mb-3">
+            <img height="250px" class="card-img-top" src="<%= book.coverImagePath %>">
+            <p>Title:
+               <%= book.title %>
+            </p>
+
+            <p class=" mt-3">Published By:
+               <%  authors.forEach(author => {  %>
+                  <% if(author.id == book.author) { %>
+                     <%= author.name %>
+                        <%  }  });    %>
+            </p>
+
+
+         </div>
+         <% }); %>
+   </div>
+
+</div>
