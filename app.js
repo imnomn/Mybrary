@@ -5,6 +5,8 @@ const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const mongoose = require("mongoose")
 const ejs = require("ejs")
+    //method override library
+const methodOverride = require("method-override")
     //index router added
 const indexRouter = require("./routes/index");
 //author router added
@@ -17,6 +19,7 @@ app.use(express.urlencoded({ extended: true }))
 app.set("view engine", "ejs")
 app.set("views", `${__dirname}/views`);
 app.use(express.static(__dirname + "/public"))
+app.use(methodOverride('_method'))
 app.set("layout", "layouts/layout")
     //decalaration of using expresslayouts
 app.use(expressLayouts);

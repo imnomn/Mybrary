@@ -1,0 +1,15 @@
+<div class="container">
+
+   <h2>Edit Author</h2>
+
+   <form action="/authors/<%= author.id %>?_method=PUT" method="post">
+      <div class="mb-3">
+         <label for="author" class="form-label">Author Name</label>
+         <input type="text" class="form-control w-25" value="<%=author.name%>" name="name" id="author">
+      </div>
+
+
+      <a href="/authors/<%= author.id %> " class="btn btn-danger">Cancel</a>
+      <button type="submit" class="btn btn-primary">Update</button>
+   </form>
+</div>

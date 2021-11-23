@@ -1,0 +1,38 @@
+<div class="container">
+   <div class="row">
+      <div class="col">
+
+         <h2 class="mb-5">
+            <%= author.name %>
+         </h2>
+         <div class="d-flex ">
+            <a class="btn btn-success me-3" href="/authors/<%= author.id %>/edit">Edit</a>
+            <form method="post" action="/authors/<%= author.id %>?_method=DELETE">
+               <button class="btn btn-danger">Delete</button>
+            </form>
+
+         </div>
+
+      </div>
+      <% if(booksByAuthor.length >0){%>
+         <div class="row">
+
+            <h2 class="my-5">Books By Author</h2>
+
+            <% booksByAuthor.forEach(book => { %>
+               <div class="col-12 col-md-3 mb-3">
+                  <img height="250px" class="card-img-top" src="<%= book.coverImagePath %>">
+                  <p>Title:
+                     <%= book.title %>
+                  </p>
+
+
+
+               </div>
+               <% }); %>
+
+
+         </div>
+         <% } %>
+   </div>
+</div>
