@@ -9,6 +9,7 @@ const imageMimeTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 router.get("/", async(req, res) => {
 
     let query = Book.find();
+
     if (req.query.name != null && req.query.name != "") {
         query = query.regex("title", new RegExp(req.query.name, "i"));
     }
@@ -44,23 +45,49 @@ router.get("/new", async(req, res) => {
 
 })
 
-// router.get("/:id", (req, res) => {
-//     res.send("author with id: " + req.params.id)
-// })
+//get rout of new author
+router.get("/:id", async(req, res) => {
+    try {
+
+        const book = await Book.findById(req.params.id).populate("author", "name").exec();
+        res.render("books/show", { book: book })
+    } catch (err) {
+        res.render("books/index");
+    }
 
 
-// router.get("/:id/edit", (req, res) => {
-//     res.send("Edit author with id: " + req.params.id)
-// })
+})
 
 
-// router.put("/:id", (req, res) => {
-//     res.send(" update author with id: " + req.params.id)
-// })
+//get rout of new author
+router.get("/:id/edit", async(req, res) => {
+    try {
+        const authors = await Authors.find({});
+        const book = await Book.findById(req.params.id);
 
-// router.delete("/:id", (req, res) => {
-//     res.send("delete author with id: " + req.params.id)
-// })
+        res.render("books/edit", { book: book, authors: authors })
+    } catch (err) {
+        res.redirect("/books");
+    }
+
+
+})
+
+
+router.delete("/:id", async(req, res) => {
+
+    try {
+
+        await Book.deleteOne({ id: req.params.id });
+        res.redirect("/books");
+
+    } catch (err) {
+        console.log(err)
+
+    }
+})
+
+
 
 //create author route of new author to be  added
 router.post("/", async(req, res) => {
@@ -84,14 +111,31 @@ router.post("/", async(req, res) => {
 
 })
 
+router.put("/:id", async(req, res) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        book.title = req.body.title,
+            book.autho = req.body.author,
+            book.publishDate = new Date(req.body.publishDate),
+            book.pageCount = req.body.pageCount,
+            book.description = req.body.description
+        saveCover(book, req.body.cover)
+        await book.save();
+        res.redirect("/books");
+    } catch (err) {
+        console.log(err);
+    }
 
-function saveCover(Book, coverEncoded) {
+})
+
+
+function saveCover(book, coverEncoded) {
 
     if (coverEncoded == null) return
     const cover = JSON.parse(coverEncoded)
     if (cover != null && imageMimeTypes.includes(cover.Type));
-    Book.coverImage = new Buffer.from(cover.data, "base64");
-    Book.coverImageType = cover.type
+    book.coverImage = new Buffer.from(cover.data, "base64");
+    book.coverImageType = cover.type
 
 
 }

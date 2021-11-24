@@ -5,9 +5,7 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
-        type: String
-    },
+
     publishDate: {
         type: Date,
         required: true
@@ -21,6 +19,7 @@ const bookSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
+    description: String,
     coverImage: {
         type: Buffer,
         required: true
@@ -28,15 +27,14 @@ const bookSchema = new mongoose.Schema({
     coverImageType: {
         type: String,
         required: true
-
     },
     author: {
         type: mongoose.Types.ObjectId,
         required: true,
         ref: "Author"
     }
-
 })
+
 bookSchema.virtual("coverImagePath").get(function() {
     if (this.coverImage != null && this.coverImageType != null) {
         return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`

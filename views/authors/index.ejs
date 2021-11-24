@@ -14,9 +14,9 @@
             <p>
                <%=author.name%>
             </p>
-            <div class="d-flex justify-content-start">
-               <a class="btn btn-success" href="/authors/<%=author.id %>/edit">edit</a>
-               <a class="btn btn-light" href="/authors/<%= author.id%>">show</a>
+            <div class="d-flex justify-content-start mb-4">
+               <a class="btn btn-success me-3" href="/authors/<%=author.id %>/edit">edit</a>
+               <a class="btn btn-info me-3" href="/authors/<%= author.id%>">show</a>
                <form method="post" action="/authors/<%=author.id%>?_method=DELETE">
                   <button class="btn btn-danger" type="submit">Delete</button>
                </form>

@@ -6,19 +6,22 @@ const authorSchema = new mongoose.Schema({
         required: true
     }
 })
-authorSchema.pre("remove", function(next) {
+authorSchema.pre("deleteOne", async function(next) {
+    try {
+        //simple "this" keyword was not working so the querry is first first filtered and then  its id is accessed
+        const query = this.getFilter();
 
-    Book.find({
-        author: this.id
-    }, (err, books) => {
-        if (err) {
-            next(err);
-        } else if (books.length > 0) {
+        const book = Book.exists({ author: query._id });
 
-            next(new Error("this author has some Books written"))
+        if (book) {
+            next(new Error("Has some books related to the author"));
         } else {
             next();
         }
-    })
+    } catch (err) {
+        next(err)
+    }
+
+
 })
 module.exports = mongoose.model("Author", authorSchema)

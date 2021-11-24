@@ -1,0 +1,40 @@
+<div class="container">
+   <div class="row">
+      <div class="col">
+
+         <h2>
+            <%= book.title %>
+         </h2>
+      </div>
+   </div>
+   <div class="row mb-5">
+      <div class="col-4">
+         <img width="200px" height="250px" class="" src="<%= book.coverImagePath %>">
+      </div>
+      <div class="col-4" offset-1>
+
+         <p>Author:
+            <%= book.author.name %>
+         </p>
+         <p>Publish Date:
+            <%= book.publishDate.toDateString() %>
+         </p>
+         <p>Page Count:
+            <%= book.pageCount %>
+         </p>
+         <p>Description:
+            <%= book.description %>
+         </p>
+      </div>
+   </div>
+   <div class="d-flex justify-content-start">
+      <a href="/books/<%= book.id %>/edit" class="btn btn-primary me-3">Edit</a>
+      <form action="/books/:<%= book.id %>?_method=DELETE" method="post">
+         <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+      <a href="/authors/<%= book.author.id %>" class="btn btn-secondary ms-3">Show Author</a>
+
+
+   </div>
+
+</div>

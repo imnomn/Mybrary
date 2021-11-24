@@ -15,7 +15,7 @@ const authorRouter = require("./routes/authors")
 const booksRouter = require("./routes/books")
 const app = express()
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.set("view engine", "ejs")
 app.set("views", `${__dirname}/views`);
 app.use(express.static(__dirname + "/public"))
